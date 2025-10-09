@@ -33,7 +33,6 @@ int detab(char buffer[], int maxlen) {
     aux[j] = '\0';
     j = 0;
     while ((buffer[j] = aux[j]) != '\0') ++j;
-    aux[j] = '\0';
     return j;
 }
 
