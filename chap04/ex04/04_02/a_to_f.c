@@ -1,0 +1,26 @@
+#include <ctype.h>
+#include <math.h>
+
+double a_to_f(char s[]) {
+    double val, power;
+    int i, sign;
+    for (i = 0; isspace(s[i]); ++i);
+    sign = (s[i] == '-') ? -1 : 1;
+    if (s[i] == '+' || s[i] == '-') i++;
+
+    for (val = 0.0; isdigit(s[i]); ++i)
+        val = 10.0 * val + (s[i] - '0');
+    if (s[i] == '.') i++;
+    for (power = 1; isdigit(s[i]); ++i) {
+        val = 10.0 * val + (s[i] - '0');
+        power *= 10;
+    }
+
+    int exp, exp_sign;
+    if (s[i] == 'e' || s[i] == 'E') i++;
+    exp_sign = (s[i] == '-') ? -1 : 1;
+    if (s[i] == '-' || s[i] == '+') i++;
+    for (exp = 0; isdigit(s[i]); ++i) exp = 10.0 * exp + (s[i] - '0');
+    double scd_power = pow(10, exp * exp_sign);
+    return sign * val / power * scd_power;
+}
